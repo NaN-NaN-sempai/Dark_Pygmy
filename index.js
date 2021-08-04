@@ -1,17 +1,7 @@
-var express = require("express");
-var bodyParser = require('body-parser');
-var app = express();
-var port = 80;
-
-
-app.use(bodyParser.json());
- 
-app.use(express.static(__dirname+'/public'));
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname+"/");
-});
-
+const express = require("express");
+const bodyParser = require('body-parser');
+const app = express();
+const port = 80;
 
 const server = app.listen(port, () => {
     console.clear();
@@ -25,6 +15,17 @@ const server = app.listen(port, () => {
         require('child_process').exec(start + ' ' + url);
     });
 });
+
+app.use(bodyParser.json());
+ 
+app.use(express.static(__dirname+'/public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname+"/");
+});
+
+
+
 
 /* var io = require("socket.io")({
     'port': port,
