@@ -24,10 +24,8 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname+"/");
 });
 
-
-
-
-/* var io = require("socket.io")({
+/* SOCKET IO BACKEND
+    var io = require("socket.io")({
     'port': port,
     'heartbeat interval': 2000,
     'heartbeat timeout' : 3000
