@@ -6,15 +6,14 @@ function inputManagerUpdate () {
         horizontal: input.linear(controlsFunctions.simpleGetKey("a"), controlsFunctions.simpleGetKey("d")),
         vertical: input.linear(controlsFunctions.simpleGetKey("s"), controlsFunctions.simpleGetKey("w")),
 
-        /* 
-        Needs initializeMouseCapture();
+        /* Needs initializeMouseCapture();
+        
         camera: {
             horizontal: controlsFunctions.getMouseAxis("horizontal"),
             vertical: controlsFunctions.getMouseAxis("vertical")
         } */
     }
 }
-
 
 var input = {
     singular: (direction = false) => {
