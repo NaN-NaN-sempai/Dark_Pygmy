@@ -67,7 +67,17 @@ async function init(){
     var realFloor = new gameObject({
         tjs: floor,
         b2type: b2PolygonShape
-    })
+    });
+
+    var wall = window.floor = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ wireframe: true,color: new THREE.Color(0,1,1)}) );
+    wall.position.x=-5;
+    wall.position.y=-2;
+    wall.scale.y=5;
+
+    var realFloor = new gameObject({
+        tjs: wall,
+        b2type: b2PolygonShape
+    });
 
 
     var hx;
