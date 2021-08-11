@@ -112,7 +112,14 @@ var controlsFunctions = {
     }
 }
 
-window.onkeydown = window.onkeyup = function(e){controlsFunctions.keyPress(e)};
+var eventFunction = function(e){
+    /* REMOVER ESTE COMENTARIO ANTES DA RELEASE
+    e.preventDefault(); */
+    controlsFunctions.keyPress(e)
+};
+
+window.addEventListener("keydown", eventFunction);
+window.addEventListener("keyup", eventFunction);
 
 var initializeMouseCapture = (dom, ignoreLeftClick = true, lockFunction = ()=>{}, unlockFunction = ()=>{}) => {
     dom.onmousedown = dom.onmouseup = function(e){
