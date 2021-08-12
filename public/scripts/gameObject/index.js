@@ -9,6 +9,8 @@ export class gameObject {
         
         scene.add(this.threeObject);
 
+        this.threeObject.gameObjectType = consObj.gameObjectType;
+
 
         // b2CircleShape or
         var fixDef = new b2FixtureDef;
@@ -19,26 +21,35 @@ export class gameObject {
             fixDef.shape.SetRadius(this.threeObject.scale.x);
         } else {
             var b2offset = 2;
-            fixDef.shape.SetAsBox(this.threeObject.scale.x/b2offset,  this.threeObject.scale.y/b2offset)
+            fixDef.shape.SetAsBox(this.threeObject.scale.x/b2offset,  this.threeObject.scale.y/b2offset);
         }
 
     
         var bodyDef = new b2BodyDef;
 
-        bodyDef.type = consObj.dynamic? b2Body.b2_dynamicBody:
-                                        b2Body.b2_staticBody; // balls can move
+        bodyDef.type = consObj.dynamic? b2Body.b2_dynamicBody: // if can move
+                                        b2Body.b2_staticBody; 
 
         bodyDef.position.y = this.threeObject.position.y;
 
-        bodyDef.position.x = this.threeObject.position.x; // Random positon between -20 and 20
+        bodyDef.position.x = this.threeObject.position.x;
 
         bodyDef.angle = this.threeObject.rotation.z;
 
-        bodyDef.userData = this.threeObject; // Keep a reference to `ball`
+        bodyDef.userData = this.threeObject; // Keep a reference to this
 
         this.b2Object = window.world.CreateBody( bodyDef ).CreateFixture( fixDef ); // Add this physics body to the world
     
 
+    }
+
+    inColision(search){
+        var result;
+        if(search != undefined){ // procurar colisão expecifica
+
+        } else { // qualquer colisão
+            
+        }
     }
 
     setPos(x,y){

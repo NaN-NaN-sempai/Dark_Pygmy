@@ -6,6 +6,8 @@ function inputManagerUpdate () {
         horizontal: input.linear(controlsFunctions.simpleGetKey("a"), controlsFunctions.simpleGetKey("d")),
         vertical: input.linear(controlsFunctions.simpleGetKey("s"), controlsFunctions.simpleGetKey("w")),
 
+        jump: controlsFunctions.simpleGetKeyDown("space") || controlsFunctions.simpleGetKeyDown("w"),
+
         /* Needs initializeMouseCapture();
         
         camera: {

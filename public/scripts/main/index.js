@@ -66,10 +66,11 @@ async function init(){
 
     var realFloor = new gameObject({
         tjs: floor,
-        b2type: b2PolygonShape
+        b2type: b2PolygonShape,
+        gameObjectType: "floor"
     });
 
-    var wall = window.floor = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ wireframe: true,color: new THREE.Color(0,1,1)}) );
+    var wall = window.f = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ wireframe: true,color: new THREE.Color(0,1,1)}) );
     wall.position.x=-5;
     wall.position.y=-2;
     wall.scale.y=5;
@@ -93,6 +94,27 @@ async function init(){
 
         hx = inputManger.horizontal/10;
 
+        truC.b2Object.m_body.ApplyImpulse({x: hx, y: 0}, {x:0,y:0});
+
+        /* if(inputManger.jump && canjunp){ 
+            c.b2Object.m_body.ApplyImpulse({x: 0, y: 5}, {x:0,y:0});
+            canjunp = false;
+            setTimeout(() => {
+                canjunp=true;
+            }, 1500);
+        } */
+
+
+        // checar se player esta tocando no chão
+        // para fazer esta checagem, buscamos por `gameObjectType` 
+        var canjunpbool = inputManger.jump &&
+                      !(truC.b2Object.m_body.GetContactList() ==  undefined) &&
+                      truC.b2Object.m_body.GetContactList().other.m_userData.gameObjectType == "floor" // <=== aqui
+
+        if(canjunpbool){
+            truC.b2Object.m_body.ApplyImpulse({x: 0, y: 5}, {x:0,y:0});
+        }
+
 
         var delta, now = (new Date()).getTime();
     
@@ -108,8 +130,6 @@ async function init(){
             10,        // velocity iterations
             10         // position iterations
         );
-
-        c.b2Object.m_body.ApplyImpulse({x:hx,y:inputManger.vertical},{x:0,y:0})
 
         // Update the scene objects
         var object = world.GetBodyList(), mesh, position;
